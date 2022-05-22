@@ -16,7 +16,7 @@ context('Assignment Task: Cypress 101', function () {
         });
     });
 
-    specify.only('Test Scenario 2:', function () {
+    specify('Test Scenario 2:', function () {
         cy.visit('https://www.lambdatest.com/selenium-playground/input-form-demo');
         cy.viewport("samsung-note9");
         cy.contains("a", "Input Form Submit").click();
@@ -32,6 +32,14 @@ context('Assignment Task: Cypress 101', function () {
         cy.get("#inputState").type(fixtureData.state);
         cy.get("#inputZip").type(fixtureData.PIN);
         cy.get('button[type="submit"]').contains("Submit").click();
-        cy.get(".success-msg.hidden").should("have.text", "Thanks for contacting us, we will get back to you shortly.").and("be.visible");
+        cy.lighthouse({
+            performance: 50,
+            accessibility: 90,
+            "best-practices": 80,
+            seo: 80,
+            pwa: 40,
+        });
+        Cypress.session.clearAllSavedSessions();
+        cy.get(".success-msg.hidden").should("have.text", "Thanks for contacting us, we will get back to you shortly.").and("be.visible"); 
     });
 });
